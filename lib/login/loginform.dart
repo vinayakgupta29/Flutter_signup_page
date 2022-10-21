@@ -15,14 +15,22 @@ class LoginForm extends StatelessWidget {
       child: Form(
         child: Column(
           children: [
+            Image.asset("assets/icons/1.png",
+            height: 100 ,),
+
+            const SizedBox(height: 100,),
+
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               cursorColor: kPrimaryColor,
               onSaved: (email) {},
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
+                border:OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(20),
+                 ),
                 hintText: "Your email",
-                prefixIcon: Padding(
+                prefixIcon: const Padding(
                   padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.person),
                 ),
@@ -34,9 +42,12 @@ class LoginForm extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 obscureText: true,
                 cursorColor: kPrimaryColor,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    ),
                   hintText: "Your password",
-                  prefixIcon: Padding(
+                  prefixIcon: const Padding(
                     padding: EdgeInsets.all(defaultPadding),
                     child: Icon(Icons.lock),
                   ),
