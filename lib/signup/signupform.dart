@@ -70,7 +70,18 @@ class _SignUpFormState extends State<SignUpForm>{
             Hero(
             tag:'singup_btn',
             child: ElevatedButton(
-              onPressed: () { },
+              onPressed: () {
+              final form = formKey.currentState!;
+
+              if (form.validate()) {
+                final email = emailController.text;
+
+                ScaffoldMessenger.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(SnackBar(
+                content: Text('Your email is $email'),
+              ));}
+              },
               style: ElevatedButton.styleFrom(
                   primary: kPrimaryColor, elevation: 0),
               child: Text(
