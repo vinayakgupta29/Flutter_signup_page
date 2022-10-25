@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class EmailFieldWidget extends StatefulWidget {
   final TextEditingController controller;
 
-  const EmailFieldWidget({
+   const EmailFieldWidget({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -15,6 +15,7 @@ class EmailFieldWidget extends StatefulWidget {
 }
 
 class _EmailFieldWidgetState extends State<EmailFieldWidget> {
+  bool _isvalid = true;
   @override
   void initState() {
     super.initState();
@@ -34,6 +35,7 @@ class _EmailFieldWidgetState extends State<EmailFieldWidget> {
   @override
   Widget build(BuildContext context) => TextFormField(
         controller: widget.controller,
+        textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           hintText: 'Email',
           border: OutlineInputBorder(
@@ -42,15 +44,29 @@ class _EmailFieldWidgetState extends State<EmailFieldWidget> {
           prefixIcon: const Icon(Icons.mail),
           suffixIcon: widget.controller.text.isEmpty
               ? Container(width: 0)
-              : IconButton(
-                  icon: const Icon(Icons.close),
+              : (_isvalid ? IconButton(
+                  icon: const Icon(Icons.check,color: Colors.green,),
+                  onPressed: (){}
+                ): IconButton(
+                  icon: const Icon(Icons.close, color: Colors.red,),
                   onPressed: () => widget.controller.clear(),
-                ),
+                ) )
         ),
         keyboardType: TextInputType.emailAddress,
         autofillHints: const [AutofillHints.email],
-        validator: (email) => email != null && !EmailValidator.validate(email)
-            ? 'Enter a valid email'
-            : null,
+        validator: (email) {
+          if(email != null && !EmailValidator.validate(email)){
+            setState(() {
+              _isvalid = false;
+            });
+            return 'Enter a Valid email';
+          }
+          else{
+            setState(() {
+              _isvalid = true;
+            });
+          }
+        }
+            
       );
 }
