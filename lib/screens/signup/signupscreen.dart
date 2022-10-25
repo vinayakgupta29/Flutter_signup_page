@@ -10,40 +10,59 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      backgroundColor: Colors.white,
-      leading: IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) =>const WelcomeScreen()));}, 
-      icon: const Icon(Icons.arrow_back,
-        color: Colors.black87,)
+    return const Scaffold(
+      body:  Center(
+        child: SingleChildScrollView(
+          child: Responsive(
+            mobile: MobileSignupScreen(),
+            desktop: DesktopSignupScreen(),
+          ),
         ),
       ),
-        body: Center(
-          child: SingleChildScrollView(
-          child: Responsive(
-            mobile: const MobileSignupScreen(),
-            desktop: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      SizedBox(
-                        width: 450,
-                        child: SignUpForm(),
-                      ),
-                      SizedBox(height: defaultPadding / 2),
-                       SocalSignUp()
-                    ],
-                  ),
-                )
-              ],
+    );
+  }
+}
+
+class DesktopSignupScreen extends StatelessWidget {
+  const DesktopSignupScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen()));
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black87,
             ),
           ),
       ),
-        ),
-    );
+    body: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SizedBox(
+                  width: 450,
+                  child: SignUpForm(),
+                ),
+                SizedBox(height: defaultPadding / 2),
+                SocalSignUp()
+              ],
+            ),
+          )
+        ],
+      ),
+  );
   }
 }
 
@@ -68,7 +87,7 @@ class MobileSignupScreen extends StatelessWidget {
               Spacer(),
             ],
           ),
-           const SocalSignUp()
+          const SocalSignUp()
         ],
       ),
     );
