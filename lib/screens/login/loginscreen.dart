@@ -2,10 +2,29 @@ import 'package:flutter/material.dart';
 import '/screens/welcome/welcomescreen.dart';
 import '/responsive.dart';
 import 'loginform.dart';
+import '/screens/signup/components/signupsocial.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Responsive(
+            mobile:  MobileLoginScreen(),
+            desktop: DesktopLoginScreen(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DesktopLoginScreen extends StatelessWidget{
+  const DesktopLoginScreen({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,28 +37,21 @@ class LoginScreen extends StatelessWidget {
             color: Colors.black87,)
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Responsive(
-            mobile: const MobileLoginScreen(),
-            desktop: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      SizedBox(
-                        width: 450,
-                        child: LoginForm(),
-                      ),
-                    ],
+      body: Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        SizedBox(
+                          width: 450,
+                          child: LoginForm(),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+                ],
+              ),
     );
   }
 }
@@ -65,6 +77,7 @@ class MobileLoginScreen extends StatelessWidget {
               Spacer(),
             ],
           ),
+          const SocalSignUp(), 
         ],
       ),
     );
